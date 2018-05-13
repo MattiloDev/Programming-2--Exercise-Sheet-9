@@ -1,20 +1,20 @@
 #include <stdio.h>
 
-int main (void) {
-
 
     int analyse(int *wholePtr , double *fracPtr, double d) {
 
-        int dInt = d;
-
-        double dFrac = d - dInt;
+        int dInt = d;   // converting from double to int truncates the double leaving only the whole part 
         
-        *fracPtr = dFrac;
-
-
-
-        printf("The Whole part of the double is: %d", dInt);
-        printf("The Fractional part of the double is: %lf", dFrac);
+        double dFrac = d - dInt; 
+        
+        dInt = abs(dInt); // converts variables to thier absolute values
+        dFrac = fabs(dFrac);
+        
+        fracPtr = &dFrac;   //initializes the pointers
+        wholePtr = &dInt;
+        
+        *fracPtr = dFrac;   // pointers set to point to the value of the variables
+        *wholePtr = dInt;
         
         if (d >= 0) {
 
@@ -22,13 +22,10 @@ int main (void) {
         }
 
         else {
-
             return -1;
-
         }
-
     }
 
-        analyse(0,0,3.8);
+        analyse(0,0,-32.7);
 
 }
