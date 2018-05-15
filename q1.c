@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
     int analyse(int *wholePtr , double *fracPtr, double d) {
 
         int dInt = d;   // converting from double to int truncates the double leaving only the whole part 
