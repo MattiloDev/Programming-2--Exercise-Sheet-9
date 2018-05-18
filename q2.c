@@ -1,60 +1,53 @@
-
 #include <stdio.h>
-
-struct TRIARR{
-
-	int row;
-	int col;
-	
-};
+#include <stdlib.h>
 
 typedef int* TRIARR;
 
-TRIARR triNew(int N);
-void triStore(struct TRIARR as, int N, int M, int row, int col, int val);
-int triFetch(struct TRIARR as, int N, int M, int row, int col);
-
-int main(){
+TRIARR triNew(int N) {
     
+    TRIARR arrayPointer = (int*) malloc((((N * (N + 1)) / 2) + N) * sizeof(int));
     
-	
-	triNew(6);	
-    	
+    if (arrayPointer == NULL) {
+        
+        printf("pointer is NULL\n"); 
+        
+    }
+    
+    return arrayPointer; 
+    
+} 
 
-	
+int triStore(TRIARR as, int N, int row, int col, int val) {
+    
+    if (row <= col && row < N && col < N) { 
+        
+        *(as + (((col * (col + 1)) / 2) + row)) = val;
+        
+        return 1;
+        
+    }
+    
+    else  {
+        
+        return -1;
+        
+    }
 }
-
-TRIARR triNew(int N)  {
-
-    int **as;
-
-	as = (int **) malloc(N  *sizeof(int *));
-
-    for (int i = 0; i <= N; i++) {
-
-		as[i] = (int *) malloc(i+1 * sizeof(int));
-
-	}
-
-    return as;
-
-}
-
-void triStore(struct TRIARR as, int N, int M, int row, int col, int val){
-	if((row < N) && (col < M) && (col >= row)){
-		printf("Set location [%d,%d] to %d\n", row, col, val);
-		as[row][col] = val;
-	} else {
-		printf("Invalid Location!\n");
-	}
-}
-
-int triFetch(struct TRIARR as, int N, int M, int row, int col){
-	if((row < N) && (col < M) && (col >= row)){
-        	printf("Fetched value %d at location [3,5]\n", as[row][col]);
-        	return as[row][col];
-    	} else {
-		printf("Invalid location!\n");
-		return 0;
-    	}
+    
+int triFetch(TRIARR as, int N, int row, int col) {
+    
+    if (row <= col && row < N && col < N) {
+       
+        int val = *(as + (((col * (col + 1)) / 2) + row)); 
+        printf("Value returned from %i , %i is %i \n", row, col, val);
+        
+        return 1;
+        
+    }
+    
+    else {
+        
+        return -1;
+        
+    }
 }
